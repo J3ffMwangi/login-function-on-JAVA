@@ -1,0 +1,29 @@
+public class Car {
+    private String licensePlate;
+    private String model;
+    private boolean isAvailable;
+
+    public Car(String licensePlate, String model) {
+        this.licensePlate = licensePlate;
+        this.model = model;
+        this.isAvailable = true;
+    }
+
+    public void rentCar() {
+        if (isAvailable) {
+            isAvailable = false;
+        }
+    }
+
+    public void returnCar() {
+        isAvailable = true;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public String getDetails() {
+        return model + licensePlate + (isAvailable ? "Available", "Rented");
+    }
+}
