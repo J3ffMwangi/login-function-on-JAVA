@@ -1,0 +1,65 @@
+/**
+ * Programmer: Jeffrey
+ * BSE-05-0195/2024
+ */
+import java.util.Scanner;
+public class LoginSystem {
+    private static final String USERNAME = "Jeff";
+    private static final String PASSWORD = "ALLMIGHTY";
+    private static final int MAX_TRIES = 3;
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("=== Welcome to the Login System ===");
+
+        int tries = 0;
+        boolean loggedIn = false;
+
+        while (tries < MAX_TRIES && !loggedIn) {
+            tries++;
+            System.out.print("Username: ");
+            String user = input.nextLine().trim();
+
+            String pass = getPassword(input);
+
+            if (user.equals(USERNAME) && pass.equals(PASSWORD)) {
+                System.out.println("Login successful. Hello, " + user + "!");
+                loggedIn = true;
+            } else {
+                System.out.println("Invalid credentials. Attempt " + tries + " of " + MAX_TRIES + ".");
+                if (tries == MAX_TRIES) {
+                    System.out.println("Maximum login attempts reached. Access denied.");
+                }
+            }
+        }
+
+        input.close();
+    }
+
+    // Method to read password while printing asterisks for each character
+    private static String getPassword(Scanner scanner) {
+        System.out.print("Password: ");
+        StringBuilder password = new StringBuilder();
+
+        try {
+            while (true) {
+                int ch = System.in.read();
+                if (ch == '\n' || ch == '\r') {
+                    break;
+                } else if (ch == '\b' || ch == 127) {
+                    if (password.length() > 0) {
+                        password.deleteCharAt(password.length());
+                        System.out.print("\b \b");
+                    }
+                } else {
+                    password.append((char) ch)
+                    System.out.print("*")
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println();
+        return password.toString();
+    }
+}
